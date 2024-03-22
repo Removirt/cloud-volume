@@ -1108,7 +1108,8 @@ class Skeleton(object):
   def viewer(
     self, units='nm', 
     draw_edges=True, draw_vertices=True,
-    color_by='radius'
+    color_by='radius',
+    volume = None
   ):
     """
     View the skeleton with a radius heatmap. 
@@ -1174,7 +1175,7 @@ class Skeleton(object):
 
           normed_radii = skel.radii / np.max(skel.radii)
           yg = ax.scatter(xs, ys, zs, c=cm.rainbow(normed_radii), marker='o')
-          cbar = fig.colorbar(colmap)
+          cbar = fig.colorbar(colmap, cax=plt.axes([0.85, 0.1, 0.03, 0.8]))
           cbar.set_label('radius (' + units + ')', rotation=270)
         elif color_by in COMPONENT_KEYWORDS:
           yg = ax.scatter(xs, ys, zs, color=component_color, marker='.')
@@ -1198,7 +1199,11 @@ class Skeleton(object):
     else:
       draw_component(0, self)
 
+    if volume is not None:
+      ax.scatter(volume[0], volume[1], volume[2])
+
     plt.show()
+    return fig, ax # moded for further manipulation
 
   def __eq__(self, other):
     if self.id != other.id:
