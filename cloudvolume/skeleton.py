@@ -1200,7 +1200,9 @@ class Skeleton(object):
       draw_component(0, self)
 
     if volume is not None:
-      ax.scatter(volume[0], volume[1], volume[2])
+      print("Plotting volume")
+      print(volume.shape)
+      ax.scatter(volume[0], volume[1], volume[2], alpha=0.1, c='r', marker='.')
 
     plt.show()
     return fig, ax # moded for further manipulation
