@@ -1109,6 +1109,7 @@ class Skeleton(object):
     self, units='nm', 
     draw_edges=True, draw_vertices=True,
     color_by='radius',
+    segmentations=None,
     volume = None
   ):
     """
@@ -1126,6 +1127,9 @@ class Skeleton(object):
       'component': color connected components seperately
         aliases: 'c', 'component', 'components'
       anything else: draw everything black
+    # added support to overlay segmentations and volume locations
+    segmentations: list of 3xN arrays of segmentations to overlay
+    volume: 3xN array of volume locations to overlay
     """
     try:
       import matplotlib.pyplot as plt
@@ -1204,6 +1208,9 @@ class Skeleton(object):
       print(volume.shape)
       ax.scatter(volume[0], volume[1], volume[2], alpha=0.1, c='r', marker='.')
 
+    if segmentations is not None:
+      for seg in segmentations:
+        ax.scatter(seg[0], seg[1], seg[2], alpha=0.1, c='b', marker='.')
     plt.show()
     return fig, ax # moded for further manipulation
 
