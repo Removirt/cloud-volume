@@ -114,3 +114,9 @@ saved_images
 .vscode
 
 experiments/
+
+# Kimimaro out files
+kimimaro_out/
+
+# sources
+sources/
